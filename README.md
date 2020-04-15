@@ -1,19 +1,52 @@
-# nuxt-auth-controller [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> 
+# Nuxt Auth Controller 
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
+> An easier approach to set up Auth within your Nuxt project
 
 ## Installation
 
 ```sh
-$ npm install --save nuxt-auth-controller
+$ yarn add @netsells/nuxt-auth-controller @nuxtjs/auth @nuxtjs/axios 
+```
+
+Edit `nuxt.config.js`
+```js
+modules: [
+  '@nuxtjs/axios',
+  '@nuxtjs/auth',
+],
 ```
 
 ## Usage
 
-```js
-const nuxtAuthController = require('nuxt-auth-controller');
+Create a `AuthController.js` file inside `app/Controllers/Http/api/`. In there is where you require the package: 
 
-nuxtAuthController('Rainbow');
+```js
+const AuthController = require('@netsells/nuxt-auth-controller');
+
+module.exports = new AuthController;
 ```
+
+Next, in your `.env` file add the following and make sure they are all populated: 
+```js
+API_BASE=http://example.com
+API_URL=${API_BASE}/api
+API_TOKEN_URL=${API_BASE}/oauth/token
+API_PERSONAL_ACCESS_CLIENT_ID=
+API_PERSONAL_ACCESS_CLIENT_SECRET=
+API_PASSWORD_GRANT_CLIENT_ID=
+API_PASSWORD_GRANT_CLIENT_SECRET=
+```
+
+You then need to add the route for your login. in `routes.js`
+```js
+
+Route.group(() => {
+   Route.post(‘auth/login’, ‘api/AuthController.login’);
+}).prefix('api');
+```
+
+
 ## License
 
  © [Martin Smith]()
