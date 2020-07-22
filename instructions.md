@@ -1,15 +1,3 @@
-# Nuxt Auth Controller 
-[![NPM version][npm-image]][npm-url]
-
-> An easier approach to set up Auth within your Nuxt and Adonis project
-
-## Installation
-
-Install via the adonis cli
-```sh
-$ npx @adonisjs/cli install @netsells/nuxt-auth-controller --yarn
-```
-
 ## Usage
 
 Make sure to register the provider inside `start/app.js` file.
@@ -31,8 +19,3 @@ modules: [
 ## Config
 
 The config file is saved as `config/nuxt-auth.js` make sure to update all paths for the auth and client credentials.
-
-
-[npm-image]: https://badge.fury.io/js/%40netsells%2Fnuxt-auth-controller.svg
-[npm-url]: https://npmjs.org/package/@netsells/nuxt-auth-controller
-
