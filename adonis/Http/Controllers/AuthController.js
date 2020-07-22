@@ -1,6 +1,10 @@
 const Config = use('Config');
 const axios = require('axios');
 
+const tokenPath = [
+    Config.get('nuxt-auth.api_url'),
+    Config.get('nuxt-auth.paths.token_url', '/oauth/token'),
+].join('');
 
 class AuthController {
     /**
@@ -11,10 +15,10 @@ class AuthController {
      * @returns {Promise<AxiosResponse<T>>}
      */
     async getToken(context) {
-        return await axios.post(process.env.API_TOKEN_URL, {
+        return await axios.post(tokenPath, {
             grant_type: 'client_credentials',
-            client_id: process.env.API_PASSWORD_GRANT_CLIENT_ID,
-            client_secret: process.env.API_PASSWORD_GRANT_CLIENT_SECRET,
+            client_id: Config.get('nuxt-auth.client_id'),
+            client_secret: Config.get('nuxt-auth.client_secret'),
         });
     }
 
@@ -26,11 +30,6 @@ class AuthController {
      * @returns {Promise<AxiosResponse<T>>}
      */
     async getAuthToken({ request }) {
-        const tokenPath = [
-            Config.get('nuxt-auth.api_url'),
-            Config.get('nuxt-auth.paths.token_url', '/oauth/token'),
-        ].join('');
-
         return await axios.post(tokenPath, {
             grant_type: 'password',
             client_id: Config.get('nuxt-auth.client_id'),
@@ -51,7 +50,6 @@ class AuthController {
      * @returns {Promise<*>}
      */
     async login({ request, response }) {
-
         const result = await this.getAuthToken({request});
 
         return response.status(result.status).json(result.data);
@@ -107,12 +105,9 @@ class AuthController {
         });
 
         return response
-        .status(result.status)
-        .json(result.data);
+            .status(result.status)
+            .json(result.data);
     }
-
-    //refresh use armalytix
-
 }
 
 module.exports = AuthController;

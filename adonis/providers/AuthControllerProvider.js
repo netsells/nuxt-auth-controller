@@ -24,8 +24,6 @@ class AuthControllerProvider extends ServiceProvider {
             Route.post('auth/password-reset', '@provider:Auth/AuthController.passwordResetRequest');
             Route.post('auth/login', '@provider:Auth/AuthController.login');
         }).prefix('api');
-
-
     }
 }
 
