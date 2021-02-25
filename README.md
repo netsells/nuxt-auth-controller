@@ -1,4 +1,4 @@
-# Nuxt Auth Controller 
+# Nuxt Auth Controller
 [![NPM version][npm-image]][npm-url]
 
 > An easier approach to set up Auth within your Nuxt and Adonis project
@@ -8,6 +8,11 @@
 Install via the adonis cli
 ```sh
 $ npx @adonisjs/cli install @netsells/nuxt-auth-controller --yarn
+```
+
+Also install the auth package you wish to use:
+```sh
+yarn add -D @netsells/nuxt-auth
 ```
 
 ## Usage
